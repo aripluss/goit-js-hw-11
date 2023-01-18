@@ -13,10 +13,10 @@ body {
   line-height: 1.5;
   background-image: -webkit-repeating-radial-gradient(
     center center,
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.2) 1px,
+    #0003,
+    #0003 1px,
     transparent 1px,
-    transparent 100%
+    transparent 15%
   );
   background-size: 20px 20px;
 }
@@ -41,7 +41,7 @@ button.is-hidden {
   justify-content: center;
   align-items: center;
   min-height: 60px;
-  background-color: rgb(103, 56, 173);
+  background: linear-gradient(90deg, #0f3443, rgb(103, 56, 173));
   box-shadow: 0px 1px 3px rgb(0 0 0 / 12%), 0px 1px 1px rgb(0 0 0 / 14%),
     0px 2px 1px rgb(0 0 0 / 20%);
 }
@@ -82,7 +82,6 @@ button.is-hidden {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   border-left-style: none;
-  cursor: pointer;
   transition: background-color 0.3s linear;
 }
 
@@ -94,6 +93,7 @@ button.is-hidden {
 #search-form [type='submit']:not([disabled]):hover,
 #search-form [type='submit']:not([disabled]):focus {
   background-color: rgb(168, 168, 168);
+  cursor: pointer;
 }
 
 /* Gallery */
@@ -203,23 +203,23 @@ button.is-hidden {
   font: inherit;
   padding: 8px;
   min-height: 42px;
-  background-color: rgb(103, 56, 173);
+  background-image: linear-gradient(90deg, #0f3443, rgb(103, 56, 173));
   border: 1px inset rgb(118, 118, 118);
   border-radius: 4px;
   margin-bottom: 20px;
-  transition: background-color 0.3s linear, color 0.3s linear;
-  cursor: pointer;
+  transition: color 0.3s linear;
   color: white;
 }
 
 .load-more[disabled],
 .load-more[disabled] {
+  background-image: none;
   background-color: white;
   color: gray;
 }
 
 .load-more:not([disabled]):hover,
 .load-more:not([disabled]):focus {
-  background-color: rgb(168, 168, 168);
-  color: rgb(103, 56, 173);
+  color: gray;
+  cursor: pointer;
 }
