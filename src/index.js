@@ -9,7 +9,32 @@ const submitBtnEl = document.querySelector('button[type="submit"]');
 const galleryEl = document.querySelector('.gallery');
 const loadMoreBtnEl = document.querySelector('.load-more');
 
+// Switcher popular/latest
+const switcherDivEl = document.createElement('div');
+switcherDivEl.classList.add('switcher-div');
+
+const switcherLeftTextEl = document.createElement('span');
+switcherLeftTextEl.innerHTML = 'Popular';
+const switcherRightTextEl = document.createElement('span');
+switcherRightTextEl.innerHTML = 'Latest';
+
+const switcherEl = document.createElement('label');
+switcherEl.classList.add('switch');
+
+const orderToggleEl = document.createElement('input');
+orderToggleEl.type = 'checkbox';
+
+const toggleSliderEl = document.createElement('span');
+toggleSliderEl.classList.add('slider');
+
+switcherEl.append(orderToggleEl, toggleSliderEl);
+switcherDivEl.append(switcherLeftTextEl, switcherEl, switcherRightTextEl);
+formEl.appendChild(switcherDivEl);
+//
+
 const pixabayAPI = new PixabayAPI();
+
+Notiflix.Notify.init({ clickToClose: true });
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -17,7 +42,6 @@ const lightbox = new SimpleLightbox('.gallery a', {
 });
 
 loadMoreBtnEl.classList.add('is-hidden');
-formEl.elements.searchQuery.required = true;
 
 formEl.addEventListener('submit', onFormSubmit);
 loadMoreBtnEl.addEventListener('click', onLoadMoreBtnClick);
@@ -29,6 +53,14 @@ async function onFormSubmit(event) {
   pixabayAPI.query = event.currentTarget.elements.searchQuery.value;
 
   try {
+    if (!orderToggleEl.checked) {
+      console.log('Popular results');
+      pixabayAPI.order = 'popular';
+    } else {
+      console.log('Latest results');
+      pixabayAPI.order = 'latest';
+    }
+
     const data = await pixabayAPI.fetchImagesByQuery();
     const { hits, totalHits } = data;
 
@@ -80,10 +112,11 @@ async function onLoadMoreBtnClick(event) {
     }
 
     galleryEl.insertAdjacentHTML('beforeend', createPhotoCards(hits));
-    event.target.disabled = false;
     lightbox.refresh();
   } catch (err) {
     console.log(err);
+  } finally {
+    event.target.disabled = false;
   }
 }
 

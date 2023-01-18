@@ -46,7 +46,8 @@ button.is-hidden {
     0px 2px 1px rgb(0 0 0 / 20%);
 }
 
-#search-form input {
+#search-form input[type='text'] {
+  min-width: 100px;
   font: inherit;
   padding: 8px;
   flex-grow: 1;
@@ -58,14 +59,14 @@ button.is-hidden {
 }
 
 @media screen and (min-width: 480px) {
-  #search-form input {
+  #search-form input[type='text'] {
     flex-grow: unset;
     width: 320px;
   }
 }
 
-#search-form input:hover,
-#search-form input:focus {
+#search-form input[type='text']:hover,
+#search-form input[type='text']:focus {
   outline: none;
 }
 
@@ -94,6 +95,81 @@ button.is-hidden {
 #search-form [type='submit']:not([disabled]):focus {
   background-color: rgb(168, 168, 168);
   cursor: pointer;
+}
+
+/* Checkbox-slider */
+
+#search-form .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+#search-form [type='checkbox'] {
+  /* Hide default HTML checkbox */
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#search-form .slider {
+  border: 1px inset rgb(118, 118, 118);
+
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gainsboro;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+
+  border-radius: 50%;
+}
+
+#search-form [type='checkbox']:hover + .slider {
+  box-shadow: 0 0 1px #2196f3;
+  background-color: rgb(168, 168, 168);
+}
+
+#search-form [type='checkbox']:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.switcher-div {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: white;
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 480px) {
+  .switcher-div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    color: white;
+    margin-left: 30px;
+  }
 }
 
 /* Gallery */

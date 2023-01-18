@@ -12,6 +12,7 @@ export class PixabayAPI {
     this.query = null;
     this.per_page = 40;
     axios.defaults.baseURL = PixabayAPI.BASE_URL;
+    this.order = 'popular';
   }
 
   async fetchImagesByQuery() {
@@ -25,6 +26,7 @@ export class PixabayAPI {
           safesearch: true,
           page: this.page,
           per_page: this.per_page,
+          order: this.order,
         },
       });
 
